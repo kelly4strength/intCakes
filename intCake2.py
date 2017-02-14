@@ -12,28 +12,28 @@
 # what if there are only two numbers in the list?
 # What if all the numbers in the list are the same?
 
-lst = [1,7,3,4]
-products = []
 
-def multiply_the_rest(lst):
 
-	for num in lst:
+def multiply_the_rest(ints):
+	products = []
+
+	for num in ints:
 		# remove the first item in the list with .pop(0)
 		# using .pop because we need to add the item back in 
-		x = lst.pop(0)
+		first_int = ints.pop(0)
 		
 		# multiply the remaining items in the list
-		y = reduce(lambda x, y: x*y, lst)
+		product = reduce(lambda x, y: x*y, ints)
 
 		# add the product to a new list
-		products.append(y)
+		products.append(product)
 
 		# need to append popped item back on to the list at the end, before you start on the next item
-		lst.append(x)
+		ints.append(first_int)
 
 	return products
 
-print multiply_the_rest(lst)
+print multiply_the_rest([1,7,3,4])
 
 
 # OTHER WAYS BESIDES LAMBDA TO MULTIPLY ALL INTS IN LIST
@@ -46,3 +46,8 @@ print multiply_the_rest(lst)
 # 		for num in lst: 
 # 			total = total * num
 # 		return total
+
+
+# Notes on lambda: http://stackoverflow.com/questions/13840379/how-can-i-multiply-all-items-in-a-list-together-with-python
+
+
