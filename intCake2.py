@@ -31,9 +31,9 @@ def multiply_the_rest(lst):
 		# need to append popped item back on to the list at the end, before you start on the next item
 		lst.append(x)
 
-		print products
+	return products
 
-multiply_the_rest(lst)
+print multiply_the_rest(lst)
 
 
 # OTHER WAYS BESIDES LAMBDA TO MULTIPLY ALL INTS IN LIST
