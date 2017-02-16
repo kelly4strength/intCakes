@@ -15,6 +15,7 @@
 
 
 def multiply_the_rest(ints):
+	""" function that returns the product of all integers except the the int at the current index """
 	products = []
 
 	for num in ints:
