@@ -7,7 +7,7 @@
 
 # lst = [11,9,4,7,13, 21, 55, 17]
 # returns [55, 21, 17]
-		# 93
+# 93
 
 # lst = [0, 9, 7]
 # returns append three highest [9, 7]
@@ -20,7 +20,7 @@
 # 		same issue as above
 # returns None
 
-lst = [-1, 9, 8, -11]
+# lst = [-1, 9, 8, -11]
 # append three highest [9, 8]
 # returns None
 
@@ -29,41 +29,47 @@ lst = [-1, 9, 8, -11]
 # append three highest [-1, -8]
 # None
 
-# lst = [-1, -9, -8, -11, -2]
+lst = [-1, -9, -8, -11, -2]
 # append three highest [-1, -2, -8]
 # [-1, -2, -8]
 # -11
 
 
+
 def find_highest_product(lst):
+	"""function to find the highest product of three integers in a list, list will always have at least 3 integers"""
+
 	# list for the three highest numbers
 	three_highest = []
 
 	# product of three highest numbers
 	product = None
 
-	if len(lst) <= 3:
-		product_of_three_highest = reduce(lambda x, y: x+y, lst)
-		three_highest.append(product_of_three_highest)
-		print "lst under 3"
-		return product_of_three_highest
-# THIS DOESN'T WORK BECAUSE WHEN THE LIST IS LESS THAN 3 (SINCE WE ARE REMOVING THE MAX NUMBERS, IT THEN HITS THE FIRST IF STATEMENT)
-# HENCE GOING TO USE A WHILE LOOP
-# JUST CHECKING THIS IS TO REMEMBER :)
-	else:	
-		for num in lst:				
-			highest_num = max(lst)
-			print "max", highest_num
-			three_highest.append(highest_num)
-			print "append three highest", three_highest
-			lst.remove(highest_num)
+	# if len(lst) == 3:
+	# 	product_of_three_highest = reduce(lambda x, y: x+y, lst)
+	# 	three_highest.append(product_of_three_highest)
+	# 	print "lst only three"
+	# 	return product_of_three_highest
 
-			if len(three_highest) == 3:
-				# multiply the remaining items in the list
-				product_of_three_highest = reduce(lambda x, y: x+y, three_highest)
+	while len(three_highest) < 3:
 
-				print three_highest
-				print product_of_three_highest
+	# else:	
+	# for num in lst:				
+		highest_num = max(lst)
+		print "max", highest_num
+
+		three_highest.append(highest_num)
+		print "append three highest", three_highest
+
+		lst.remove(highest_num)
+		# lst.append(0) - only added this to keep the original list the same length...
+
+		if len(three_highest) == 3:
+			# multiply the remaining items in the list
+			product_of_three_highest = reduce(lambda x, y: x+y, three_highest)
+
+			print three_highest
+			return product_of_three_highest
 
 print find_highest_product(lst)
 
