@@ -16,11 +16,11 @@
 # to add them before going through the loop
 # if len(lst) == 3 then return three items added
 
-# lst = [2, 2, 2]
+# lst = [2, 2, 2]  
 # 		same issue as above
 # returns None
 
-# lst = [-1, 9, 8, -11]
+lst = [-1, 9, 8, -11]
 # append three highest [9, 8]
 # returns None
 
@@ -36,22 +36,34 @@
 
 
 def find_highest_product(lst):
+	# list for the three highest numbers
 	three_highest = []
+
+	# product of three highest numbers
 	product = None
 
-	for num in lst:
-		highest_num = max(lst)
-		print "max", highest_num
-		three_highest.append(highest_num)
-		print "append three highest", three_highest
-		lst.remove(highest_num)
-		if len(three_highest) == 3:
-			# multiply the remaining items in the list
-			product_of_three_highest = reduce(lambda x, y: x+y, three_highest)
+	if len(lst) <= 3:
+		product_of_three_highest = reduce(lambda x, y: x+y, lst)
+		three_highest.append(product_of_three_highest)
+		print "lst under 3"
+		return product_of_three_highest
+# THIS DOESN'T WORK BECAUSE WHEN THE LIST IS LESS THAN 3 (SINCE WE ARE REMOVING THE MAX NUMBERS, IT THEN HITS THE FIRST IF STATEMENT)
+# HENCE GOING TO USE A WHILE LOOP
+# JUST CHECKING THIS IS TO REMEMBER :)
+	else:	
+		for num in lst:				
+			highest_num = max(lst)
+			print "max", highest_num
+			three_highest.append(highest_num)
+			print "append three highest", three_highest
+			lst.remove(highest_num)
 
-			print three_highest
-			return product_of_three_highest
+			if len(three_highest) == 3:
+				# multiply the remaining items in the list
+				product_of_three_highest = reduce(lambda x, y: x+y, three_highest)
 
+				print three_highest
+				print product_of_three_highest
 
 print find_highest_product(lst)
 
