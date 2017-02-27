@@ -19,3 +19,13 @@ def merge_ranges(meeting_times):
 	1. the end_time of the First meeting and the start time of the second meeting are equal [(1,2), (2,3)]
 	2. the second meeting ends befor ethe first meeting ends [(1,5), (2,3)]
 
+	for each tuple in list:
+		compare each tuple and earliest start_time = first
+		and other is second
+
+		if the end time of the first >= the start time of the second
+			merger two meeting sinto one time range
+			the resulting time range's start time is the first meeting's start and 
+			its end time is the later of the two meeitngs end times
+		else:
+			leave them separate
