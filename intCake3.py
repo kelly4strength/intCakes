@@ -29,7 +29,7 @@
 # append three highest [-1, -8]
 # None
 
-lst = [-1, -9, -8, -11, -2]
+# lst = [-1, -9, -8, -11, -2]
 # append three highest [-1, -2, -8]
 # [-1, -2, -8]
 # -11
@@ -71,7 +71,7 @@ def find_highest_product(lst):
 			print three_highest
 			return product_of_three_highest
 
-print find_highest_product(lst)
+print find_highest_product([-1, -9, -8, -11, -2])
 
 
 
