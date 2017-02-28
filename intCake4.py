@@ -18,28 +18,36 @@ def merge_ranges(meeting_times):
 	print second
 
 	for meeting in ordered_meeting_times:
+
+		# shows the condensed ranges of meeting times
+		busy_times = []
+
 # 		if end_time of first == start time of second
 		if first[1] == second[0]:
-# 			then merge meetings 
+# 			then merge meetings into one time range [(0, 5), (1,3), (2,4)]
+			busy_times.append((first[0], second[1]))
 
-		
-# 		if second ends before the first meeting ends [(1,5), (2,3)]
-		if second[1] <= first[1]:
-# 			then merge the meetings
+ 		if first[1] >= second[0]:
+			busy_times.append((first[0], first[1]))
+			print busy_times
 
-# 		compare each tuple and earliest start_time = first
-# 		and other is second
+		else:
+			busy_times.append((first)(second))
 
-# 		# if the end_time of first >= start_time of the second
-# 		# 	merge the two meetings into one time range
+merge_ranges(meeting_times)
 
-# 		# 	the resulting time range's start time = 
-# 		# 	the first meeting's start_time and its end_time 
-# 		# 	is the later of the two meeitngs end times
-# 		else:
-# 			leave them separate
 
-# merge_ranges(meeting_times)
+# 	same as if first[1] >= second[0]:
+# 		if second ends before the first meeting ends[(0, 5), (1,3), (2,4)]
+		# if second[1] <= first[1]:
+		# 	busy_times.append((first[0], first[1]))
+		# 	print busy_times
+
+	# 	the resulting time range's start time = 
+	# 	the first meeting's start_time and its end_time 
+	# 	is the later of the two meeitngs end times
+
+
 
 # the meetings overlapped because end_time of the first is after the start_time of the second 
 # our ideas of first and second are important here
