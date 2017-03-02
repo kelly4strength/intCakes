@@ -2,30 +2,56 @@
 # Write a function merge_ranges() that takes a list of meeting time ranges and returns a list of condensed ranges
 # from operator import itemgetter
 
-meeting_times = [(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)]
+meeting_times = [(0, 1), (3, 5), (4, 8), (5, 9), (10, 12), (9, 10), (11, 12)]
+# should return [(0, 1), (3, 12)]
 # meeting_times = [(1,3), (2,4)]
 
 def merge_ranges(meeting_times):
 	"""determines all busy times based on list of tuples showing busy calendar times"""
 	# sorted() will put them in order
-	ordered_meeting_times = sorted(meeting_times)
+	# ordered_meeting_times = sorted(meeting_times)
+	# print ordered_meeting_times
 	
-	busy_times = []
+	# busy_times = []
 
 	# for (start_time, end_time) in ordered_meeting_times:
-	for i in range((len(ordered_meeting_times)) -1):
+	for i in range(len(meeting_times)):
+		ordered_meeting_times = sorted(meeting_times)
+		print ordered_meeting_times
 
 		start_time = ordered_meeting_times[i][0]
 		end_time = ordered_meeting_times[i][1]
 
 		if end_time < ordered_meeting_times[i+1][0]:
-			busy_times.append((start_time, end_time))
+			# busy_times.append((start_time, end_time))
+			# skip
+			continue
 
 					# start_time of next meeting 
 		if end_time >= ordered_meeting_times[i+1][0]: 
-			busy_times.append((start_time, ordered_meeting_times[i+1][1]))
+			meeting_times.append((start_time, ordered_meeting_times[i+1][1]))
 			del ordered_meeting_times[i+1]
-			print "list", ordered_meeting_times
+			merge_ranges(ordered_meeting_times)
+			# print "list", 
+
+		# has to look back
+		if 
+
+		# what's the base case for recursion
+		# if there are no more overlapping meetings
+		else: 
+			# print ordered_meeting_times
+			return
+
+merge_ranges(meeting_times)
+
+
+
+		# might need to do the reverse too, I'm seeing (3,8), (5,10), (10,12)
+		# [(0, 1) {(3, 5), (4, 8)} {(5, 9), (9, 10)} {(10, 12), (11, 12)}]
+
+# Could I make this recursive and have it keep calling until it's stripped of extras?
+# tuples are immutable but I can add the new one and delete the old..
 
 		# if start_time >= previous start_time and <= previous end_time:
 		# if start_time >= ordered_meeting_times[i-1][0] and <= ordered_meeting_times[i+1][0]
@@ -33,9 +59,7 @@ def merge_ranges(meeting_times):
 		# # works except for 4, 8 which fits inside 3, 8 which was created before
 		# because i'm not comparing to the busy times list, just the ordered_meeting_times list
 		
-		print busy_times
-
-merge_ranges(meeting_times)
+		# print busy_times
 
 
 	# identify the first meeting
