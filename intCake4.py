@@ -6,21 +6,15 @@ meeting_times = [(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)]
 # meeting_times = [(1,3), (2,4)]
 
 def merge_ranges(meeting_times):
-
+	"""determines all busy times based on list of tuples showing busy calendar times"""
 	# sorted() will put them in order
 	ordered_meeting_times = sorted(meeting_times)
-
-	# identify the first meeting
-	# first = ordered_meeting_times[0]
-	# [(start_time, end_time)]
-	# merge meetings where start_time and end_time don't have an upper bound
-	# upper_bound = ordered_meeting_times[0][0]
-
+	
 	busy_times = []
 
 	# for (start_time, end_time) in ordered_meeting_times:
 	for i in range((len(ordered_meeting_times)) -1):
-	# for meeting in ordered_meeting_times:
+
 		start_time = ordered_meeting_times[i][0]
 		end_time = ordered_meeting_times[i][1]
 
@@ -30,14 +24,25 @@ def merge_ranges(meeting_times):
 					# start_time of next meeting 
 		if end_time >= ordered_meeting_times[i+1][0]: 
 			busy_times.append((start_time, ordered_meeting_times[i+1][1]))
-		
-		# works except for 4, 8 whcih fits inside 3, 8 which was created before
+			del ordered_meeting_times[i+1]
+			print "list", ordered_meeting_times
+
+		# if start_time >= previous start_time and <= previous end_time:
+		# if start_time >= ordered_meeting_times[i-1][0] and <= ordered_meeting_times[i+1][0]
+		# 	skip
+		# # works except for 4, 8 which fits inside 3, 8 which was created before
 		# because i'm not comparing to the busy times list, just the ordered_meeting_times list
-		
 		
 		print busy_times
 
 merge_ranges(meeting_times)
+
+
+	# identify the first meeting
+	# first = ordered_meeting_times[0]
+	# [(start_time, end_time)]
+	# merge meetings where start_time and end_time don't have an upper bound
+	# upper_bound = ordered_meeting_times[0][0]
 
 	# for i in range(len(ordered_meeting_times)):
 	# 	# print ordered[i], ordered[i + 1]
@@ -48,28 +53,28 @@ merge_ranges(meeting_times)
 	# 		# merge
 	# 		busy_times.append((ordered_meeting_times[i][0], ordered_meeting_times[i]+1[1])
 
-# 		if first == meeting:
-# 			busy_times.append(meeting)
+	# 		if first == meeting:
+	# 			busy_times.append(meeting)
 
-# # 		if end_time of first >= start time of next
-# 		# then that meeting is within the bounds of the first and can be merged into it
-# 		if first[1] >= meeting[0]:
-# # 			then merge meetings into one time range [(0, 5), (1,3), (2,4)] (we totally lose (1,3) here)
-# 			busy_times.append((first[0], meeting[1]))
+	# # 		if end_time of first >= start time of next
+	# 		# then that meeting is within the bounds of the first and can be merged into it
+	# 		if first[1] >= meeting[0]:
+	# # 			then merge meetings into one time range [(0, 5), (1,3), (2,4)] (we totally lose (1,3) here)
+	# 			busy_times.append((first[0], meeting[1]))
 
-# 		# if end time of first < start time of next, 
+	# 		if end time of first < start time of next, 
 
-#  		# if first[1] < meeting[0]:
-# 			# busy_times.append((meeting)
-# 			# # print busy_times
+	#  		if first[1] < meeting[0]:
+	# 			busy_times.append((meeting)
+	# 			# print busy_times
 
-# 		else:
-# 			# leave them separate
-# 			busy_times.append(meeting)
+	# 		else:
+	# 			# leave them separate
+	# 			busy_times.append(meeting)
 
-# 		print busy_times
+	# 		print busy_times
 
-# merge_ranges(meeting_times)
+	# merge_ranges(meeting_times)
 
 
 # 	same as if first[1] >= second[0]:
