@@ -3,136 +3,81 @@
 # from operator import itemgetter
 
 meeting_times = [(0, 1), (3, 5), (4, 8), (5, 9), (10, 12), (9, 10), (11, 12)]
+
 # should return [(0, 1), (3, 12)]
-# meeting_times = [(1,3), (2,4)]
 
 def merge_ranges(meeting_times):
 	"""determines all busy times based on list of tuples showing busy calendar times"""
-	# sorted() will put them in order
-	# ordered_meeting_times = sorted(meeting_times)
+
+	ordered_meeting_times = sorted(meeting_times)
+	number_to_go_back = len(ordered_meeting_times)
 	# print ordered_meeting_times
-	
-	# busy_times = []
+	merging = True
 
-	# for (start_time, end_time) in ordered_meeting_times:
-	for i in range(len(meeting_times)):
-		ordered_meeting_times = sorted(meeting_times)
-		print ordered_meeting_times
+	# if no merges then false and it'll stop
+	while merging == True:
 
-		start_time = ordered_meeting_times[i][0]
-		end_time = ordered_meeting_times[i][1]
+		# but the for loop, means it's only going through 7 times?
+		for i in range(len(ordered_meeting_times)):
+			try:
+				start_time = ordered_meeting_times[i][0]
+				end_time = ordered_meeting_times[i][1]
+				# print ordered_meeting_times
 
-		if end_time < ordered_meeting_times[i+1][0]:
-			# busy_times.append((start_time, end_time))
-			# skip
-			continue
+				try:
+					# print ordered_meeting_times
+					# print ordered_meeting_times[i+1]
+					if end_time >= ordered_meeting_times[i+1][0]:
+						print "yes"
+						print end_time, ordered_meeting_times[i+1][0]
+						ordered_meeting_times[i] = ((start_time, ordered_meeting_times[i+1][1]))
+						# make the merged extra tuple into and empty tuple and append it to the end of the list to keep the same length
+						del ordered_meeting_times[i+1]
+						number_to_go_back -= 1
+						# AND append to the end of the list - except not using append?
+						ordered_meeting_times.append(())
+						
+						print ordered_meeting_times
 
-					# start_time of next meeting 
-		if end_time >= ordered_meeting_times[i+1][0]: 
-			meeting_times.append((start_time, ordered_meeting_times[i+1][1]))
-			del ordered_meeting_times[i+1]
-			merge_ranges(ordered_meeting_times)
-			# print "list", 
+						print ordered_meeting_times[i]
+						# print number_to_go_back
 
-		# has to look back
-		if 
+					if end_time < ordered_meeting_times[i+1][0]:
+						print "no"
+						i = ((start_time, end_time))
+				
+				except: 
+					# [(0, 1), (3, 12), (11, 12)]
+					# if i is the last tuple in the list with 2 intesgers...
+					# can't use last item in the list because they will be () empty tuples
+					if i == (len(ordered_meeting_times) - number_to_go_back):
+						print i 
 
-		# what's the base case for recursion
-		# if there are no more overlapping meetings
-		else: 
-			# print ordered_meeting_times
-			return
+						if start_time >= ordered_meeting_times[i-1][1]: 
+							ordered_meeting_times[i] = ((ordered_meeting_times[i-1][0], end_time))
+							ordered_meeting_times[i-1] = ()
+
+						if end_time < ordered_meeting_times[i-1][0]:
+							i = ((start_time, end_time))
+			except:
+				if i == ():
+					continue
+
+				else:
+					merging = False
+					# print ordered_meeting_times
 
 merge_ranges(meeting_times)
 
 
-
-		# might need to do the reverse too, I'm seeing (3,8), (5,10), (10,12)
-		# [(0, 1) {(3, 5), (4, 8)} {(5, 9), (9, 10)} {(10, 12), (11, 12)}]
-
-# Could I make this recursive and have it keep calling until it's stripped of extras?
-# tuples are immutable but I can add the new one and delete the old..
-
-		# if start_time >= previous start_time and <= previous end_time:
-		# if start_time >= ordered_meeting_times[i-1][0] and <= ordered_meeting_times[i+1][0]
-		# 	skip
-		# # works except for 4, 8 which fits inside 3, 8 which was created before
-		# because i'm not comparing to the busy times list, just the ordered_meeting_times list
-		
-		# print busy_times
+# Currently returns:
+# (env) Kellys-MacBook-Pro-2:intCake kellyhoffer$ python intCake4.py
+# [(0, 1), (3, 5), (4, 8), (5, 9), (9, 10), (10, 12), (11, 12)]
+# [(0, 1), (3, 5), (4, 8), (5, 9), (9, 10), (10, 12), (11, 12)]
+# [(0, 1), (3, 8), (5, 9), (9, 10), (10, 12), (11, 12), ()]
+# [(0, 1), (3, 8), (5, 9), (9, 10), (10, 12), (11, 12), ()]
+# [(0, 1), (3, 8), (5, 10), (10, 12), (11, 12), (), ()]
+# [(0, 1), (3, 8), (5, 10), (10, 12), (11, 12), (), ()]
+# [(0, 1), (3, 8), (5, 10), (10, 12), (), (), ()]
 
 
-	# identify the first meeting
-	# first = ordered_meeting_times[0]
-	# [(start_time, end_time)]
-	# merge meetings where start_time and end_time don't have an upper bound
-	# upper_bound = ordered_meeting_times[0][0]
-
-	# for i in range(len(ordered_meeting_times)):
-	# 	# print ordered[i], ordered[i + 1]
-	# 	# ordered_meeting_times[i] is the item (1, 3) then (2, 4)
-	# 	# if ordered_meeting_times[i] == ordered_meeting_times[i +1]
-	# 		# do nothing
-	# 	if ordered_meeting_times[i][1] >= [i+1][0]
-	# 		# merge
-	# 		busy_times.append((ordered_meeting_times[i][0], ordered_meeting_times[i]+1[1])
-
-	# 		if first == meeting:
-	# 			busy_times.append(meeting)
-
-	# # 		if end_time of first >= start time of next
-	# 		# then that meeting is within the bounds of the first and can be merged into it
-	# 		if first[1] >= meeting[0]:
-	# # 			then merge meetings into one time range [(0, 5), (1,3), (2,4)] (we totally lose (1,3) here)
-	# 			busy_times.append((first[0], meeting[1]))
-
-	# 		if end time of first < start time of next, 
-
-	#  		if first[1] < meeting[0]:
-	# 			busy_times.append((meeting)
-	# 			# print busy_times
-
-	# 		else:
-	# 			# leave them separate
-	# 			busy_times.append(meeting)
-
-	# 		print busy_times
-
-	# merge_ranges(meeting_times)
-
-
-# 	same as if first[1] >= second[0]:
-# 		if second ends before the first meeting ends[(0, 5), (1,3), (2,4)]
-		# if second[1] <= first[1]:
-		# 	busy_times.append((first[0], first[1]))
-		# 	print busy_times
-
-	# 	the resulting time range's start time = 
-	# 	the first meeting's start_time and its end_time 
-	# 	is the later of the two meeitngs end times
-
-
-
-# the meetings overlapped because end_time of the first is after the start_time of the second 
-# our ideas of first and second are important here
-
-
-# # meeting_times = [(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)]
-# # could we make the first and seconds into sets
-# firsts {1, 2, 3, 4}
-# seconds {2, 5, 6, 7}
-
-# and then do set math?
-# firsts & seconds = intersection {2, 3, 4}
-#  and the outliers mean, the start and ends?
-
-
-	# # get the start times - but they're not attached to 
-	# start_times = [start[0] for start in meetings]
-	# end_times = [end[1] for end in meetings]
-
-	# # assign the first meeting based on lowest start time
-	# first = min(start_times) 
-
-	# # or sort the tuples by the first item, which is the start time - using itemgetter library? module?
-	# sorted(meetings, key=itemgetter(0))
