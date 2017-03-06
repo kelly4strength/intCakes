@@ -39,7 +39,8 @@ def merge_ranges(meeting_times):
 merge_ranges(meeting_times)
 
 
-
+################################################################################
+# ******faster interview cake answer******
 
 # meeting_times = [(0, 1), (3, 5), (4, 8), (5, 9), (10, 12), (9, 10), (11, 12)]
 
