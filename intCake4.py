@@ -1,47 +1,83 @@
-
 # Write a function merge_ranges() that takes a list of meeting time ranges and returns a list of condensed ranges
 # from operator import itemgetter
 
 meeting_times = [(0, 1), (3, 5), (4, 8), (5, 9), (10, 12), (9, 10), (11, 12)]
 
-# should return [(0, 1), (3, 12)]
-
 def merge_ranges(meeting_times):
-	"""determines all busy times based on list of tuples showing busy calendar times"""
-
 	ordered_meeting_times = sorted(meeting_times)
 
-	# new list for merged meetings, start it with the first in the ordered list
-	busy_times = [ordered_meeting_times[0]]
+	start_ends = zip(*ordered_meeting_times)
 
-	# for loop starts after the 0th element
-	for start_time, end_time in ordered_meeting_times[1:]:
-		# print "ordered_meeting_times[1:]", ordered_meeting_times[1:]
+	start_times = list(start_ends[0])
+	end_times = list(start_ends[1])
 
-		# the (start, end) equals last thing in merged meetings?
-		last_merged_meeting_start, last_merged_meeting_end = busy_times[-1]
-		print "last merged meetings", busy_times[-1]
+	merging = True
 
-# I think busy_times is just a way to hold the current merged tuple while you're going through 
-		# if the current and last meetings overlap, use the latest end time
-		# if the current start is less than or equal to last merged meeting end
-		if (start_time <= last_merged_meeting_end):
-			# and then we make busy_times[-1] into the last start and the MAX OF THE TWO end times!!!
-		    busy_times[-1] = (last_merged_meeting_start, max(last_merged_meeting_end, end_time))
+	while merging == True:
+	
+		for i in range(len(ordered_meeting_times)):
 
-		# add the current meeting since it doesn't overlap
-		else:
-		    busy_times.append((start_time, end_time))
+			try:
+				# if end_times[i] < start_times[i+1]:
+				# 	print "got to if"
 
-	print busy_times
+				if end_times[i] >= start_times[i+1]:
+					merging = True
+					del start_times[i+1]
+					del end_times[i]
+
+				else:
+					merging = False
+
+			except IndexError:
+				continue
+
+		answer = zip(start_times, end_times)
+
+	print answer
 
 merge_ranges(meeting_times)
 
 
 
 
+# meeting_times = [(0, 1), (3, 5), (4, 8), (5, 9), (10, 12), (9, 10), (11, 12)]
+
+# # should return [(0, 1), (3, 12)]
+
+# def merge_ranges(meeting_times):
+# 	"""determines all busy times based on list of tuples showing busy calendar times"""
+
+# 	ordered_meeting_times = sorted(meeting_times)
+
+# 	# new list for merged meetings, start it with the first in the ordered list
+# 	busy_times = [ordered_meeting_times[0]]
+
+# 	# for loop starts after the 0th element
+# 	for start_time, end_time in ordered_meeting_times[1:]:
+# 		# print "ordered_meeting_times[1:]", ordered_meeting_times[1:]
+
+# 		# the (start, end) equals last thing in merged meetings?
+# 		last_merged_meeting_start, last_merged_meeting_end = busy_times[-1]
+# 		print "last merged meetings", busy_times[-1]
+
+# # I think busy_times is just a way to hold the current merged tuple while you're going through 
+# 		# if the current and last meetings overlap, use the latest end time
+# 		# if the current start is less than or equal to last merged meeting end
+# 		if (start_time <= last_merged_meeting_end):
+# 			# and then we make busy_times[-1] into the last start and the MAX OF THE TWO end times!!!
+# 		    busy_times[-1] = (last_merged_meeting_start, max(last_merged_meeting_end, end_time))
+
+# 		# add the current meeting since it doesn't overlap
+# 		else:
+# 		    busy_times.append((start_time, end_time))
+
+# 	print busy_times
+
+# merge_ranges(meeting_times)
 
 
+################################################################################################
 
 	# ordered_meeting_times = sorted(meeting_times)
 	# # number_to_go_back = len(ordered_meeting_times)
