@@ -8,6 +8,7 @@
 amount = 4
 denominations = [1, 2, 3, 4]
 number_of_denominations = 0
+remainder = 0
 
 def make_change(amount):
 
@@ -21,6 +22,12 @@ def make_change(amount):
 		if amount % i == 0:
 			number_of_denominations = amount / i
 			print "you need", number_of_denominations, "of", i
+
+		if amount % i != 0:
+			number_of_denominations = amount / i
+			remainder = amount % i
+			print "you need", number_of_denominations, "of", i, "and you get a remainder of", remainder
+
 
 make_change(amount)
 
