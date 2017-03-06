@@ -6,19 +6,37 @@
 
 
 amount = 4
-denominations = [1,2,3]
+denominations = [1, 2, 3, 4]
+number_of_denominations = 0
 
 def make_change(amount):
 
 	# make a function that will work for any denomination
 	# for each denomination, we can use it once, twice or as many
 	# times as it takes to reach ot overshoot the amount with the coins of that denomination alone
-	for denomination in denominations:
 
-		for i in amount
-			breakdown = amount / denomination
+	for i in denominations:
 
-			return breakdown
+		# if the ammount can evenly be divided by a single denomination, then calculate # of denominations needed
+		if amount % i == 0:
+			number_of_denominations = amount / i
+			print "you need", number_of_denominations, "of", i
+
+make_change(amount)
+
+			# # if the amount can
+			# if amount / denomination == 0:
+			# 	print denomination
+
+			# # might not need this one, jsut the greater than 0 below
+			# if amount / denomination != 0:
+				
+			# 	# divide amount by denomination (for a postive # result)
+			# 	if amount / denomination > 0:
+
+				# breakdown = amount / denomination
+
+			# return breakdown
 			
 			# if there is leftoved in the amount, 
 			# try other denominations until the amoutn either == it or can be divided by it
