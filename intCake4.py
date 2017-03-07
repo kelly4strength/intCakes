@@ -1,7 +1,7 @@
 # Write a function merge_ranges() that takes a list of meeting time ranges and returns a list of condensed ranges
 # from operator import itemgetter
 
-meeting_times = [(0, 1), (3, 5), (4, 8), (5, 9), (10, 12), (9, 10), (11, 12)]
+meeting_times = [(1, 10), (2, 6), (3, 5), (7, 9)]
 
 def merge_ranges(meeting_times):
 	ordered_meeting_times = sorted(meeting_times)

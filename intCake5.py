@@ -8,6 +8,7 @@
 amount = 4
 denominations = [1, 2, 3, 4]
 number_of_denominations = 0
+number_of_other_denominations = 0
 remainder = 0
 
 def make_change(amount):
@@ -18,32 +19,25 @@ def make_change(amount):
 
 	for i in denominations:
 
+		# tried this and it actually works and returns floats, could put a try/except in for non integers?
+		# if amount < min(denominations):
+		# 	print "cannot calculate as the amount is less than the available denominations"
+
 		# if the ammount can evenly be divided by a single denomination, then calculate # of denominations needed
 		if amount % i == 0:
 			number_of_denominations = amount / i
 			print "you need", number_of_denominations, "of", i
 
-		if amount % i != 0:
+		elif amount % i != 0:
 			number_of_denominations = amount / i
 			remainder = amount % i
-			print "you need", number_of_denominations, "of", i, "and you get a remainder of", remainder
+			
+			for k in denominations:
+				# then we need to find out which denominations the remainder can be divided by
+				number_of_other_denominations = remainder / k
 
+				if number_of_other_denominations > 0:
+					print "you need", number_of_denominations, "of", i, "and", number_of_other_denominations, "of", k
 
 make_change(amount)
 
-			# # if the amount can
-			# if amount / denomination == 0:
-			# 	print denomination
-
-			# # might not need this one, jsut the greater than 0 below
-			# if amount / denomination != 0:
-				
-			# 	# divide amount by denomination (for a postive # result)
-			# 	if amount / denomination > 0:
-
-				# breakdown = amount / denomination
-
-			# return breakdown
-			
-			# if there is leftoved in the amount, 
-			# try other denominations until the amoutn either == it or can be divided by it
